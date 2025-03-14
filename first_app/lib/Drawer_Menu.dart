@@ -58,6 +58,150 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
               leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
             ),
           ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 2",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 3",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 4",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 5",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 6",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 7",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 8",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
+          Card(
+            elevation: 15,
+            shadowColor: Colors.amber,
+            child: ListTile(
+              title: Text(
+                "ບົດທີ 9",
+                style: TextStyle(
+                  color: Colors.blue.shade900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
+            ),
+          ),
         ],
       ),
     );

@@ -2,10 +2,12 @@ import 'package:first_app/MenuHomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     show
+        AlertDialog,
         BuildContext,
         Center,
         Colors,
         Column,
+        Divider,
         ElevatedButton,
         IconButton,
         Icons,
@@ -17,8 +19,10 @@ import 'package:flutter/material.dart'
         Scaffold,
         State,
         StatefulWidget,
+        TextButton,
         TextField,
-        Widget;
+        Widget,
+        showDialog;
 import 'package:flutter/painting.dart';
 import 'package:flutter/src/widgets/container.dart';
 
@@ -130,7 +134,118 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.orange,
         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 45),
       ),
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (c) {
+            return AlertDialog(
+              title: Text("ປ້ອນຂໍ້ມູນສ່ວນຕົວ"),
+              content: Text(
+                "ລາຍລະອຽດຂໍ້ມູນສ່ວນຕົວ",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+              actions: [
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person_off_outlined,
+                      size: 25,
+                      color: Colors.green,
+                    ),
+                    labelText: "ປ້ອນລະຫັດ",
+                  ),
+                ),
+                Divider(),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person_add_alt,
+                      size: 25,
+                      color: Colors.green,
+                    ),
+                    labelText: "ຊື່",
+                  ),
+                ),
+                Divider(),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.family_restroom,
+                      size: 25,
+                      color: Colors.green,
+                    ),
+                    labelText: "ນາມສະກຸນ",
+                  ),
+                ),
+
+                Divider(),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person_3_outlined,
+                      size: 25,
+                      color: Colors.green,
+                    ),
+                    labelText: "ຊື່ຜູ້ໃຊ້ລະບົບ",
+                  ),
+                ),
+                Divider(),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.key_off,
+                      size: 25,
+                      color: Colors.green,
+                    ),
+                    labelText: "ລະຫັດຜ່ານ",
+                  ),
+                ),
+                Divider(),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        print("ບັນທຶກແລ້ວ");
+                      },
+                      child: Text("ບັນທຶກ"),
+                    ),
+                    SizedBox(width: 25),
+                    // Divider(),
+                    TextButton(
+                      onPressed: () {
+                        print("ຍົກເລີກແລ້ວ");
+                      },
+                      child: Text("ຍົກເລີກ"),
+                    ),
+                  ],
+                ),
+                Divider(),
+              ],
+            );
+          },
+        );
+      },
       child: Text(
         "Sign up",
         style: TextStyle(
