@@ -1,3 +1,4 @@
+import 'package:first_app/subchapter1/submenu.dart';
 import 'package:flutter/material.dart';
 
 class Drawer_Menu extends StatefulWidget {
@@ -54,6 +55,10 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
               ),
               onTap: () {
                 Navigator.of(context).pop();
+                MaterialPageRoute route = MaterialPageRoute(
+                  builder: (c) => submenu(),
+                );
+                Navigator.of(context).push(route);
               },
               leading: Icon(Icons.book, size: 30, color: Colors.green.shade900),
             ),
