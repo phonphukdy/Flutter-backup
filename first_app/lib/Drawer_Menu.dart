@@ -50,7 +50,7 @@ class _Drawer_MenuState extends State<Drawer_Menu> {
             ),
           ),
           Card(
-            elevation: 15,
+            elevation: 15, // create shawdow below card
             shadowColor: Colors.amber,
             child: ListTile(
               title: Text(
