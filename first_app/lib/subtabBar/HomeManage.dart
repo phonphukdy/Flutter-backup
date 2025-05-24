@@ -1,6 +1,8 @@
 import 'package:first_app/subMangaePage/CategoryPage.dart';
 import 'package:first_app/subMangaePage/ProductsPage.dart';
 import 'package:first_app/subMangaePage/unitpage.dart';
+import 'package:first_app/subtabBar/BookPage.dart';
+import 'package:first_app/subtabBar/BookTypePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,7 @@ List itms = [
   "ຂໍ້ມູນລູກຄ້າ",
   "ຂໍ້ມູນພະນັກງານ",
   "ອັດຕາແລກປ່ຽນ",
+  "ຂໍ້ມູນປື້ມ",
 ];
 
 List iconsize = [80];
@@ -28,9 +31,19 @@ List icon = [
     size: iconsize[0],
     color: iconColor[0],
   ),
+  Icon(Icons.book, size: iconsize[0], color: iconColor[0]),
 ];
 
-List manageItem = [unitPage(), CategoryPage(), ProductsPage()];
+List manageItem = [
+  unitPage(),
+  CategoryPage(),
+  ProductsPage(),
+  unitPage(),
+  CategoryPage(),
+  ProductsPage(),
+  BookTypePage(),
+  BookPage(),
+];
 
 class HomeManage extends StatefulWidget {
   const HomeManage({super.key});
