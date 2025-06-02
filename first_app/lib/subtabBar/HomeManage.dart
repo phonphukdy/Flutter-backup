@@ -2,7 +2,9 @@ import 'package:first_app/subMangaePage/CategoryPage.dart';
 import 'package:first_app/subMangaePage/ProductsPage.dart';
 import 'package:first_app/subMangaePage/unitpage.dart';
 import 'package:first_app/subtabBar/BookPage.dart';
+import 'package:first_app/subtabBar/BookUnitPage.dart';
 import 'package:first_app/subtabBar/BookTypePage.dart';
+import 'package:first_app/subtabBar/TestDropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,9 +40,9 @@ List manageItem = [
   unitPage(),
   CategoryPage(),
   ProductsPage(),
-  unitPage(),
+  TestDropdown(),
   CategoryPage(),
-  ProductsPage(),
+  BookUnitPage(),
   BookTypePage(),
   BookPage(),
 ];

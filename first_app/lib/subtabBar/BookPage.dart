@@ -11,8 +11,10 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   List itm = [];
-  int? selectValue;
   List<String> itms = [];
+  List<String> itms_2 = [];
+  int? selectValue;
+  int? selectValue_2;
 
   String chk = ""; // ເກັບຄ່າ bookid ເອົາໄວ້ໃນການກວດສອບເງື່ອນໄຂ
   TextEditingController txtSearch = TextEditingController();
@@ -21,29 +23,72 @@ class _BookPageState extends State<BookPage> {
   TextEditingController txtname = TextEditingController();
   TextEditingController txtprice = TextEditingController();
   TextEditingController txtpage = TextEditingController();
+  TextEditingController txtunit = TextEditingController();
 
   final url = "http://localhost:8000/book/";
 
   @override
   void initState() {
-    fetchAllData();
-    fetchAndAddBookTypes();
-    // searchData("");
     super.initState();
+    // selectValue = 0;
+    fetchAndAddBookTypes();
+    fetchAndAddUnit();
+    fetchAllData();
+    // searchData("");
   }
   // initState ຈະຖືກເອີ້ນໃຊ້ໂດຍອັດຕະໂນມັດດ້ວຍຕົວ framework ເອງ
   // super.initState() ຖ້າບໍ່ໃຊ້ໂຕນີ້ໃນການເອີ້ນຕາມລຳດັບອາດເຮັດໃຫ້ເກີດຂໍ້ຜິດພາດໄດ້
   // ທີຕ້ອງໃຊ້ initState ແບບນີ້ເພາະວ່າ fetchAllData ມັນໃຊ້ເວລາ (async (Fututre)) ດັ່ງນັ້ນຈື່ງຕ້ອງເອົາມັນມາໂຫຼດຖ້າໃນຕອນເປີດນໜ້ານີ້ເລີຍ ຈືງເຮັດໃຫ້ມັນໄວຂື້ນ, ຖ້າໄປເອີ້ນໃຊ້ຕາມຫຼັງຂໍ້ມູນຈະບໍ່ໂຊທັນທີເພາະຖ້າໂຫຼດຢູ່
 
-  // fetch booktype then assign in
+  // // fetch booktype then assign in
+  // Future<void> fetchAndAddBookTypes() async {
+  //   final response = await http.get(Uri.parse('http://localhost:8000/btype'));
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     final List<dynamic> results = data['result'];
+  //     setState(() {
+  //       itms.addAll(results.map((item) => item['booktype_name'] as String));
+  //       selectValue = null;
+  //     });
+  //     print(itms);
+  //   } else {
+  //     throw Exception('Failed to load book types');
+  //   }
+  // }
+
   Future<void> fetchAndAddBookTypes() async {
     final response = await http.get(Uri.parse('http://localhost:8000/btype'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final List<dynamic> results = data['result'];
-      itms.addAll(results.map((item) => item['booktype_name'] as String));
+      setState(() {
+        itms =
+            results
+                .map((item) => item['booktype_name'] as String)
+                .toList(); // <-- กำหนดใหม่ ไม่ใช้ addAll
+        selectValue = null;
+      });
+      print(itms);
     } else {
       throw Exception('Failed to load book types');
+    }
+  }
+
+  Future<void> fetchAndAddUnit() async {
+    final response = await http.get(Uri.parse('http://localhost:8000/unit'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> results = data['result'];
+      setState(() {
+        itms_2 =
+            results
+                .map((item) => item['Uname'] as String)
+                .toList(); // <-- กำหนดใหม่ ไม่ใช้ addAll
+        selectValue = null;
+      });
+      print(itms_2);
+    } else {
+      throw Exception('Failed to load unit');
     }
   }
 
@@ -95,8 +140,12 @@ class _BookPageState extends State<BookPage> {
     String price,
     String page,
     int? btypeid,
+    int? Uid,
   ) async {
     try {
+      if (bookid == "" && bookname == "") {
+        return;
+      }
       final String urlAdd = "http://localhost:8000/book/";
       final response = await http.post(
         Uri.parse(urlAdd),
@@ -107,6 +156,7 @@ class _BookPageState extends State<BookPage> {
           "price": price,
           "page": page,
           "btypeid": btypeid,
+          "Uid": Uid,
         }),
       );
       if (response.statusCode == 200) {
@@ -146,6 +196,7 @@ class _BookPageState extends State<BookPage> {
     String price,
     String page,
     int? selectValue,
+    int? Uid,
   ) async {
     try {
       final String urlUpdate = "http://localhost:8000/book/$bookid";
@@ -157,6 +208,7 @@ class _BookPageState extends State<BookPage> {
           "price": price,
           "page": page,
           "btypeid": selectValue,
+          "Uid": Uid,
         }),
       );
       if (response.statusCode == 200) {
@@ -251,25 +303,97 @@ class _BookPageState extends State<BookPage> {
     );
   }
 
+  // Widget TextBookTypePage() {
+  //   return DropdownButton(
+  //     onChanged: (value) {
+  //       myInitialItem = value!;
+  //       setState(() {});
+  //     },
+  //     hint: Text("ເລືອກ"),
+  //     items:
+  //         itms.map((items) {
+  //           return DropdownMenuItem(value: items, child: Text(items));
+  //         }).toList(),
+  //   );
+  // }
+
   Widget TextBookTypePage() {
     return DropdownButton<int>(
       hint: Text("ເລືອກປະເພດປື້ມ"),
       value: selectValue,
       items: List.generate(itms.length, (index) {
-        final c = itms[index];
+        // final c = itms[index];
         return DropdownMenuItem<int>(
+          // key: ValueKey(itms.length),
           value: index,
-          child: Text('$c', style: TextStyle(color: Colors.blue, fontSize: 18)),
+          child: Text(
+            itms[index],
+            style: TextStyle(color: Colors.blue, fontSize: 18),
+          ),
         );
       }),
       onChanged: (newIndex) {
         setState(() {
-          selectValue = newIndex;
+          selectValue = newIndex!;
           print("เลือก index: $selectValue (${itms[selectValue!]})");
         });
       },
+      // selectedItemBuilder: (BuildContext context) {
+      //   return itms.map<Widget>((String item) {
+      //     return Text(item);
+      //   }).toList();
+      // },
     );
   }
+
+  Widget TextBookUnit() {
+    return DropdownButton<int>(
+      hint: Text("ເລືອກຫົວໜ່ວຍ"),
+      value: selectValue,
+      items: List.generate(itms_2.length, (index) {
+        // final c = itms[index];
+        return DropdownMenuItem<int>(
+          // key: ValueKey(itms.length),
+          value: index,
+          child: Text(
+            itms_2[index],
+            style: TextStyle(color: Colors.blue, fontSize: 18),
+          ),
+        );
+      }),
+      onChanged: (newIndex_2) {
+        setState(() {
+          selectValue_2 = newIndex_2!;
+          print("เลือก index: $selectValue_2 (${itms[selectValue_2!]})");
+        });
+      },
+      // selectedItemBuilder: (BuildContext context) {
+      //   return itms.map<Widget>((String item) {
+      //     return Text(item);
+      //   }).toList();
+      // },
+    );
+  }
+
+  // // widget okbutton() {
+  // //   return elevatedbutton(onpressed: () {}, child: text("ຕົກລົງ"));
+  // }
+
+  // Widget BookInFo() {
+  //   return Column(
+  //     children: [
+  //       TextBookID(),
+  //       SizedBox(height: 10),
+  //       TextBookName(),
+  //       SizedBox(height: 10),
+  //       TextBookPrice(),
+  //       SizedBox(height: 10),
+  //       TextBookPage(),
+  //       SizedBox(height: 10),
+  //       OKButton(),
+  //     ],
+  //   );
+  // }
 
   void showAddBookDialog() {
     showDialog(
@@ -290,6 +414,8 @@ class _BookPageState extends State<BookPage> {
                 TextBookPage(),
                 SizedBox(height: 10),
                 TextBookTypePage(),
+                SizedBox(height: 10),
+                TextBookUnit(),
               ],
             ),
           ),
@@ -302,7 +428,8 @@ class _BookPageState extends State<BookPage> {
                     txtname.text,
                     txtprice.text,
                     txtpage.text,
-                    selectValue,
+                    selectValue! + 1,
+                    selectValue_2! + 1,
                   );
                 } else {
                   EditData(
@@ -310,7 +437,8 @@ class _BookPageState extends State<BookPage> {
                     txtname.text,
                     txtprice.text,
                     txtpage.text,
-                    selectValue,
+                    selectValue! + 1,
+                    selectValue_2! + 1,
                   );
                 }
                 Navigator.of(context).pop();
@@ -320,6 +448,7 @@ class _BookPageState extends State<BookPage> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                selectValue = null;
               },
               child: Text("ຍົກເລີກ"),
             ),
@@ -449,6 +578,7 @@ class _BookPageState extends State<BookPage> {
                           txtname.text = itmdata['bookname'];
                           txtprice.text = '${itmdata['price']}';
                           txtpage.text = '${itmdata['page']}';
+                          txtunit.text = '${itmdata['Uid']}';
                           showAddBookDialog();
                         },
                         icon: Icon(
@@ -500,6 +630,14 @@ class _BookPageState extends State<BookPage> {
                 ListTile(
                   title: Text(
                     itmdata['booktype_name'],
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Text(
+                    itmdata['Uname'],
                     style: TextStyle(
                       color: Colors.green,
                       fontSize: 20,
